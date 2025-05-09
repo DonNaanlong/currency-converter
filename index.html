@@ -1,0 +1,91 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .form-container{
+            font-family: sans-serif;
+            background-color: rgb(108, 108, 192);
+            width: 600px;
+            height: 500px;
+            margin: 10px;
+            padding: 40px;
+            border-radius: 10px;
+            font-size: 15px;
+            line-height: 50px;
+        }
+
+        .text{
+            height: 40px;
+            border-radius: 5px;
+        }
+
+        .card{
+            background-color: #fff;
+            height: 300px;
+            width: 300px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="form-container">
+    <h1>$DON CURRENCY CHECKER</h1>
+    <form>
+        <div>
+            <div class="card">
+                <label for="">Amount in USD:</label><br>
+                <input type="number" placeholder="input amount" class="text" id="dollar"><br>
+                
+                <select id="dollar">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="NGN">NGN</option>
+                    <option value="NGN">GBP</option>
+                    <option value="NGN">CAD</option>
+                </select>
+
+                <label for="">converted to:</label><br>
+                <!-- <input type="number" class="text" id="naira"><br> -->
+                <select id="naira">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="NGN">NGN</option>
+                    <option value="NGN">GBP</option>
+                    <option value="NGN">CAD</option>
+                </select>
+                
+                <input type="button" value="check rate" id="check"><br>
+
+                <div id="#dollar"></div>
+                <div id="#naira"></div> 
+
+                <div id="result"></div>
+    
+            </div>
+        </div>
+    </form>
+    <script>
+
+        let button=document.getElementById('check');
+        button.addEventListener('click',(e) => {
+            e.preventDefault();
+
+            let currency = document.getElementById('dollar').value;
+            let naira = document.getElementById('naira').value;
+            let amount = document.getElementById('amount')
+
+            fetch("https://open.er-api.com/v6/latest/USD").then((response) => response.json()).then ((data)=>{
+                document.getElementById('#dollar').innerHTML=data.rates.USD;
+                document.getElementById('#naira').innerText =data.rates.NGN;
+            })
+
+            if (data.rates) {
+                document.getElementById("result").innerText =`${data} ${dollar} = ${data.result} ${naira} ${data.amount} = ${amount}`;
+            }
+        })
+
+    </script>
+</body>
+</html>
