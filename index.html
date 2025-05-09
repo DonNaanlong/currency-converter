@@ -31,12 +31,12 @@
     </style>
 </head>
 <body class="form-container">
-    <h1>$DON CURRENCY CHECKER</h1>
+    <h1>$DON CURRENCY CONVERTER</h1>
     <form>
         <div>
             <div class="card">
                 <label for="">Amount in USD:</label><br>
-                <input type="number" placeholder="input amount" class="text" id="dollar"><br>
+                <input type="number" placeholder="input amount" class="text" id="amount"><br>
                 
                 <select id="dollar">
                     <option value="USD">USD</option>
@@ -49,9 +49,9 @@
                 <label for="">converted to:</label><br>
                 <!-- <input type="number" class="text" id="naira"><br> -->
                 <select id="naira">
-                    <option value="USD">USD</option>
+                    <option value="USD">NGN</option>
                     <option value="EUR">EUR</option>
-                    <option value="NGN">NGN</option>
+                    <option value="NGN">USD</option>
                     <option value="NGN">GBP</option>
                     <option value="NGN">CAD</option>
                 </select>
@@ -74,17 +74,20 @@
 
             let currency = document.getElementById('dollar').value;
             let naira = document.getElementById('naira').value;
-            let amount = document.getElementById('amount')
+            let amount = document.getElementById('amount').value
 
             fetch("https://open.er-api.com/v6/latest/USD").then((response) => response.json()).then ((data)=>{
-                document.getElementById('#dollar').innerHTML=data.rates.USD;
-                document.getElementById('#naira').innerText =data.rates.NGN;
+                //document.getElementById('amount').innerText= ${amount};
+                document.getElementById('#dollar').innerText=`Dollar: ${data.rates.amount}`;
+                document.getElementById('#naira').innerText =`Naira: ${data.rates.NGN*amount}`;
             })
 
             if (data.rates) {
                 document.getElementById("result").innerText =`${data} ${dollar} = ${data.result} ${naira} ${data.amount} = ${amount}`;
             }
         })
+
+        
 
     </script>
 </body>
